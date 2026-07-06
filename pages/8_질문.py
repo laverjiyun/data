@@ -1,4 +1,3 @@
-import streamlit as pd
 import streamlit as st
 
 # 웹앱 제목 설정
@@ -8,11 +7,11 @@ st.subheader("친구들과 함께 듣는 드라이브 송 취합용")
 st.divider()  # 구분선
 
 # ----------------------------------------
-# 질문 1: 출발할 때 차 안의 분위기 (다중 선택)
+# 질문 1: 출발할 때 차 안의 분위기 (드롭다운 단일 선택)
 # ----------------------------------------
 
 # 질문 제목
-st.markdown("#### **Q1. 출발할 때 차 안의 분위기는 어땠으면 좋겠어?** (복수 선택 가능)")
+st.markdown("#### **Q1. 출발할 때 차 안의 분위기는 어땠으면 좋겠어?**")
 
 # 선택지 정의
 options = [
@@ -22,12 +21,12 @@ options = [
     "💤 아무 소리 안 나는 고요함 (잠 좀 자자...)",
 ]
 
-# multiselect 컴포넌트 생성
-# default 파라미터를 사용하면 처음에 기본으로 선택되어 있을 항목을 지정할 수 있습니다 (생략 가능)
-selected_atmospheres = st.multiselect(
-    label="원하는 분위기를 모두 골라줘!",  # 입력창 위에 들어갈 작은 안내 문구
+# selectbox 컴포넌트 생성 (드롭다운)
+selected_atmosphere = st.selectbox(
+    label="원하는 분위기를 하나만 골라줘!",  # 입력창 위에 들어갈 작은 안내 문구
     options=options,
-    placeholder="여기를 클릭해서 분위기를 골라보세요"
+    index=None,  # 처음에 아무것도 선택되지 않은 상태로 둡니다 (기본값은 0번 인덱스)
+    placeholder="여기를 눌러 드롭다운 메뉴를 열어보세요"
 )
 
 # ----------------------------------------
@@ -35,7 +34,7 @@ selected_atmospheres = st.multiselect(
 # ----------------------------------------
 st.divider()
 
-if selected_atmospheres:
-    st.success(f"선택한 분위기: {', '.join(selected_atmospheres)}")
+if selected_atmosphere:
+    st.success(f"선택한 분위기: {selected_atmosphere}")
 else:
-    st.info("선택지를 하나 이상 골라주세요!")
+    st.info("분위기를 선택해 주세요!")
